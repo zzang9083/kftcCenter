@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+
+jwt:
+  secretKey  : "kftcOtpPlainSecretKey"
+  expireTime : 7776000
+
+
+#lock:
+#  key: RECORD_LOCK
