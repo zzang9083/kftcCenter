@@ -1,11 +1,12 @@
-package com.project.kftcCenter.service;
+package com.project.kftcCenter.application;
 
+import com.project.kftcCenter.application.dto.TokenDTO;
 import com.project.kftcCenter.domain.Customer;
 import com.project.kftcCenter.domain.SecurityMedia;
 import com.project.kftcCenter.domain.Token;
 import com.project.kftcCenter.repository.CustomerRepository;
 import com.project.kftcCenter.repository.SecurityMediaRepository;
-import com.project.kftcCenter.service.funtion.TokenUtil;
+import com.project.kftcCenter.application.funtion.TokenUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,17 +26,23 @@ public class OtpRegService {
         this.securityMediaRepository= securityMediaRepository;
     }
 
-    public SecurityMedia reqOtpRegReq(Customer customer) {
+    public TokenDTO reqOtpRegReq(Customer customer) {
+
+        SecurityMedia otp = null;
         //고객 등록
-        Customer newCust = customerRepository.saveAndFlush(customer);
+        Customer newCust = customerRepository.save(customer);
         //otp 생성
         SecurityMedia newOtp = securityMediaRepository.saveAndFlush(new SecurityMedia(customer));
         //토큰 생성
         String tokenId = tokenUtil.createToken(newOtp.getSecuCdn());
-        newOtp.setToken(new Token(TokenUtil.getClaimsByToken(tokenId)));
-        SecurityMedia otp = securityMediaRepository.save(newOtp);
+        Token newToken = new Token(TokenUtil.getClaimsByToken(tokenId));
 
-        return otp;
+        newOtp.getToken().add(newToken);
+        otp = securityMediaRepository.save(newOtp);
+
+        //이력 생성
+
+        return TokenDTO.from(newToken);
     }
 
 }

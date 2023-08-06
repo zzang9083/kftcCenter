@@ -1,4 +1,4 @@
-package com.project.kftcCenter.controller.dto;
+package com.project.kftcCenter.presentation.dto;
 
 import com.project.kftcCenter.domain.OtpCommInfo;
 import lombok.Getter;

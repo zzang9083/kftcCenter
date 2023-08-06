@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
@@ -28,9 +25,9 @@ public class Token {
 
     private LocalDateTime sysLsmdTs; // 최종변경시간
 
-//    @OneToOne
-//    @JoinColumn(name = "secu_cdn")
-//    private SecurityMedia securityMedia;      // 고객id(fk)
+    @ManyToOne
+    @JoinColumn(name = "secu_cdn")
+    private SecurityMedia securityMedia;   // 보안매체
 
     public Token(Claims claims) {
         this.tknNo = claims.getId();

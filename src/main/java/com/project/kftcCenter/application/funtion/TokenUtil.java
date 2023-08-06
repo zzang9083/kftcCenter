@@ -1,4 +1,4 @@
-package com.project.kftcCenter.service.funtion;
+package com.project.kftcCenter.application.funtion;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -25,9 +25,11 @@ public class TokenUtil {
 
     private static String cachedSecretKey; // 시크릿 키를 담는 변수
 
-    public TokenUtil() {
-        this.cachedSecretKey = setSecretKey().toString(); // 암호화된 시크릿 키 저장
-    }
+
+    public TokenUtil() {};
+//    public TokenUtil() {
+//        this.cachedSecretKey = setSecretKey().toString(); // 암호화된 시크릿 키 저장
+//    }
 
 
 

@@ -21,7 +21,7 @@ import static javax.persistence.FetchType.LAZY;
 public class SecurityMedia {
 
     @Id
-    @Column(name = "secu_cdn") @GeneratedValue
+    @Column(name = "secu_cdn")
     private Long secuCdn; // 보안매체 일련번호
 
     @Enumerated(EnumType.STRING)
@@ -34,13 +34,13 @@ public class SecurityMedia {
 
     private LocalDateTime sysLsmdTs; // 최종변경시간
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "cust_id")
     private Customer customer;      // 고객id(fk)
 
 
-    @OneToOne(mappedBy = "token", fetch = LAZY, cascade = CascadeType.ALL)
-    private Token token;    // 토큰
+    @OneToMany(mappedBy = "securityMedia", fetch = LAZY)
+    private List<Token> token;    // 토큰
 
     @OneToMany(mappedBy = "securityMedia") // 보안매체 이력
     private List<SecurityMediaHistory> securityMediaHistoryList = new ArrayList<>();
@@ -52,6 +52,7 @@ public class SecurityMedia {
         this.isncYmd = LocalDate.now();
         this.sysLsmdTs = LocalDateTime.now();
         this.customer  = customer;
+        customer.getSecurityMedia().add(this);
     }
 
 
