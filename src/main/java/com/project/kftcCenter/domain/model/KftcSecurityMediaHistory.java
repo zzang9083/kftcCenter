@@ -1,4 +1,4 @@
-package com.project.kftcCenter.domain;
+package com.project.kftcCenter.domain.model;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SecurityMediaHistory {
+public class KftcSecurityMediaHistory {
 
     @Id
     @GeneratedValue
@@ -22,7 +22,7 @@ public class SecurityMediaHistory {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "secuCdn")   // 보안매체 일련번호
-    private SecurityMedia securityMedia;
+    private KftcSecurityMedia kftcSecurityMedia;
 
 
     private LocalDate trnYmd; // 거래년월일

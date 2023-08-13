@@ -23,10 +23,9 @@ public class TokenUtil {
     @Value("${jwt.expireTime}")
     private static long expireTime; // 만료시간
 
-    private static String cachedSecretKey; // 시크릿 키를 담는 변수
+    private static String cachedSecretKey = "sdfnhweedfdsfsdfsdfewfwefewrtwejkfhjweklfjewlkgwejkgl"; // 시크릿 키를 담는 변수
 
 
-    public TokenUtil() {};
 //    public TokenUtil() {
 //        this.cachedSecretKey = setSecretKey().toString(); // 암호화된 시크릿 키 저장
 //    }
@@ -34,24 +33,25 @@ public class TokenUtil {
 
 
     // 시크릿 키를 BASE64로
-    private SecretKey setSecretKey() {
-        String keyBase64Encoded = Base64.getEncoder().encodeToString(secretKeyPlain.getBytes());
-        return Keys.hmacShaKeyFor(keyBase64Encoded.getBytes());
-    }
+//    private static SecretKey setSecretKey() {
+//        String keyBase64Encoded = Base64.getEncoder().encodeToString(secretKeyPlain.getBytes());
+//        return Keys.hmacShaKeyFor(keyBase64Encoded.getBytes());
+//    }
 
 
     // 토큰 생성
     public String createToken(Long subject) {
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-        byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(cachedSecretKey.toString());
+        byte[] secretKeyBytes = DatatypeConverter.parseBase64Binary(cachedSecretKey);
 
         Key signalkey = new SecretKeySpec(secretKeyBytes, signatureAlgorithm.getJcaName());
 
         return Jwts.builder()
                 .setSubject(subject.toString())
                 .signWith(signalkey, signatureAlgorithm)
-                .setExpiration(new Date(System.currentTimeMillis() * expireTime))
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1 * (1000 * 60 * 60 * 24)))
                 .compact();
     }
 

@@ -1,6 +1,6 @@
 package com.project.kftcCenter.application.dto;
 
-import com.project.kftcCenter.domain.Token;
+import com.project.kftcCenter.domain.model.KftcToken;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,8 +16,8 @@ public class TokenDTO {
         this.tknNo = tknNo;
     }
 
-    public static TokenDTO from(Token token) {
-        return new TokenDTO(token.getTknNo());
+    public static TokenDTO from(KftcToken kftcToken) {
+        return new TokenDTO(kftcToken.getTknNo());
     }
 
 

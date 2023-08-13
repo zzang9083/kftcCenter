@@ -1,11 +1,9 @@
-package com.project.kftcCenter.domain;
+package com.project.kftcCenter.domain.model;
 
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-@Component
-@Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class OtpCommInfo {
 
     private String extTrnBswrDcd; // 대외거래업무구분코드 4
