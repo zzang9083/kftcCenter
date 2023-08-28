@@ -1,4 +1,4 @@
-package com.project.kftcCenter.domain.model;
+package com.project.kftcCenter.domain.securityMedia.model;
 
 import io.jsonwebtoken.Claims;
 import lombok.AccessLevel;

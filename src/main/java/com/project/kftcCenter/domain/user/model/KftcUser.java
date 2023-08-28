@@ -1,6 +1,10 @@
-package com.project.kftcCenter.domain.model;
+package com.project.kftcCenter.domain.user.model;
 
 import com.project.kftcCenter.application.dto.OtpRegDTO;
+import com.project.kftcCenter.common.exception.BusinessException;
+import com.project.kftcCenter.common.response.ErrorCode;
+import com.project.kftcCenter.domain.securityMedia.model.KftcSecurityMedia;
+import com.project.kftcCenter.domain.securityMedia.model.KftcSecurityMediaType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -66,7 +70,17 @@ public class KftcUser {
     }
 
 
+    public KftcSecurityMedia getActiveSecurityMedia(Long inputSecuCdn, KftcSecurityMediaType type) {
 
+        KftcSecurityMedia findOtp = kftcSecurityMedia.stream()
+                .filter(s -> s.getSecuType() == type)
+                .filter(s -> s.getSecuCdn() == inputSecuCdn)
+                .findFirst().orElseThrow(() -> new BusinessException(ErrorCode.NOT_EXIST_OTP_ERROR));
 
+        if(!findOtp.isNomalStatus()) {
+            throw new BusinessException(ErrorCode.AUTH_OTP_STATUS_ERROR);
+        }
 
+        return findOtp;
+    }
 }

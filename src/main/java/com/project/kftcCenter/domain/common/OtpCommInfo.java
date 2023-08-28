@@ -1,7 +1,6 @@
-package com.project.kftcCenter.domain.model;
+package com.project.kftcCenter.domain.common;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 @Getter
 public class OtpCommInfo {
@@ -20,6 +19,10 @@ public class OtpCommInfo {
 
     private String tlsdHms; // 전문송신시각 6
 
+    public void setFnbbRpcdNo(String fnbbRpcdNo) {
+        this.fnbbRpcdNo = fnbbRpcdNo;
+    }
+
     @Builder
     public OtpCommInfo(String extTrnBswrDcd, String tlgrIttcd, String extTrnDcd, String hndlIcd
                         , String fnbbRpcdNo, String trnTlgrSrn, String tlsdHms) {
@@ -30,6 +33,16 @@ public class OtpCommInfo {
         this.fnbbRpcdNo = fnbbRpcdNo;
         this.trnTlgrSrn = trnTlgrSrn;
         this.tlsdHms    = tlsdHms;
+    }
+
+    public OtpCommInfo(OtpCommInfo oldOtpCommInfo) {
+        this.extTrnBswrDcd = oldOtpCommInfo.getExtTrnBswrDcd();
+        this.tlgrIttcd = oldOtpCommInfo.getTlgrIttcd();
+        this.extTrnDcd = oldOtpCommInfo.getExtTrnDcd();
+        this.hndlIcd = oldOtpCommInfo.getHndlIcd();
+        this.fnbbRpcdNo = oldOtpCommInfo.getFnbbRpcdNo();
+        this.trnTlgrSrn = oldOtpCommInfo.getTrnTlgrSrn();
+        this.tlsdHms    = oldOtpCommInfo.getTlsdHms();
     }
 
 }

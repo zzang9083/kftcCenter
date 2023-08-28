@@ -1,9 +1,9 @@
-package com.project.kftcCenter.domain.model;
+package com.project.kftcCenter.domain.securityMedia.model;
 
+import com.project.kftcCenter.domain.user.model.KftcUser;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -22,7 +22,7 @@ public class KftcSecurityMedia {
     @Id
     @GeneratedValue
     @Column(name = "secu_no")
-    private Long secuNo;       // 금결원 이용자 번호
+    private Long secuNo;       // 보안매체 번호(pk)
 
     @Column(name = "secu_cdn")
     private Long secuCdn; // 보안매체 일련번호
@@ -32,6 +32,9 @@ public class KftcSecurityMedia {
 
     @Enumerated(EnumType.STRING)
     private KftcSecurityMediaStatus sccdScd; // 보안매체 상태코드
+
+
+    private int authErrCnt; //인증오류횟수
 
     private LocalDate isncYmd; // 발급년월일
 
@@ -62,9 +65,16 @@ public class KftcSecurityMedia {
         return new KftcSecurityMedia(kftcUser, secuCdn, type, status);
 
     }
+    public void setToken(KftcToken newKftcToken) {
+        this.getKftcToken().add(newKftcToken);
+        newKftcToken.setKftcSecurityMedia(this);
+    }
 
-
-
-
-
+    public boolean isNomalStatus() {
+        if(sccdScd.getCode() == "000")
+            return true;
+        else {
+            return false;
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package com.project.kftcCenter.presentation.dto;
 
-import com.project.kftcCenter.domain.model.OtpCommInfo;
+import com.project.kftcCenter.domain.common.OtpCommInfo;
 import lombok.Getter;
 
 import java.time.LocalDate;

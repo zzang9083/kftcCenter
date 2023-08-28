@@ -1,4 +1,4 @@
-package com.project.kftcCenter.domain.model;
+package com.project.kftcCenter.domain.user.model;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;

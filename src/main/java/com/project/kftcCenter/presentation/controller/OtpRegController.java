@@ -2,7 +2,7 @@ package com.project.kftcCenter.presentation.controller;
 
 import com.project.kftcCenter.application.dto.OtpRegDTO;
 import com.project.kftcCenter.application.dto.TokenDTO;
-import com.project.kftcCenter.domain.model.OtpCommInfo;
+import com.project.kftcCenter.domain.common.OtpCommInfo;
 import com.project.kftcCenter.presentation.dto.OtpRegReq;
 import com.project.kftcCenter.application.OtpRegService;
 import com.project.kftcCenter.presentation.dto.OtpRegRspn;
@@ -35,12 +35,12 @@ public class OtpRegController {
 
         OtpCommInfo returnOtpComm = otpRegReq.getOtpCommInfo();
         boolean success = true;
-        TokenDTO token = null;
+        TokenDTO tokenDTO = null;
 
         try {
             log.info("*****before");
             // otp 등록
-            token = otpRegService.reqOtpRegReq(OtpRegDTO.from(otpRegReq));
+            tokenDTO = otpRegService.reqOtpRegReq(OtpRegDTO.from(otpRegReq));
         } catch (Exception e) {
             log.info("*****catch: {}",e);
         } finally {
@@ -48,7 +48,7 @@ public class OtpRegController {
                 //returnOtpComm.setFnbbRpcdNo("0000");
             }
         }
-        return OtpRegRspn.of(token, otpRegReq);
+        return OtpRegRspn.of(tokenDTO, otpRegReq, "A0000");
 
     }
 

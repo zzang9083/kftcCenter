@@ -1,6 +1,6 @@
-package com.project.kftcCenter.repository;
+package com.project.kftcCenter.infrastructure.securityMedia;
 
-import com.project.kftcCenter.domain.model.KftcSecurityMedia;
+import com.project.kftcCenter.domain.securityMedia.model.KftcSecurityMedia;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.project.kftcCenter.application.dto;
 
-import com.project.kftcCenter.domain.model.OtpCommInfo;
+import com.project.kftcCenter.domain.common.OtpCommInfo;
 import com.project.kftcCenter.presentation.dto.OtpRegReq;
 import lombok.Getter;
 
